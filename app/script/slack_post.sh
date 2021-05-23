@@ -22,7 +22,7 @@ EOF
 }
 
 
-curl -s -o result.html -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36' https://item.rakuten.co.jp/jiggys-shop/r-2-012/ > /dev/null
+curl -s -o result.html https://item.rakuten.co.jp/jiggys-shop/r-2-012/
 
 mv result.html /data/
 sed -i 's/EUC-JP/UTF-8/'  /data/result.html
@@ -37,7 +37,7 @@ if [ "${RET}" = "undefined" ]; then
   slack_post "${MESSAGE}"
 fi
 
-if [ "${RET}" != "×" ]; then
+if [ "${RET}" = "undefined" ] && [ "${RET}" != "×" ]; then
   MESSAGE="在庫が復活しました https://item.rakuten.co.jp/jiggys-shop/r-2-012/"
 
   slack_post "${MESSAGE}"
